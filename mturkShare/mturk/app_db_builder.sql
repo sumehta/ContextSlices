@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `app_db` (
   `worker_id` varchar(200) default NULL,
   `assignment_id` varchar(200) default NULL,
   `user_data` text,
-  `img-id` varchar(200) default NULL,
+  `img_id` varchar(200) default NULL,
   `endpoint` varchar(50) NOT NULL,
   `when_completed` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)

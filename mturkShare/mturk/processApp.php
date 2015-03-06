@@ -4,7 +4,7 @@
 $weatherData = $_POST['weather'];
 $assignmentID = $_POST['assignmentId'];
 $workerID = $_POST['workerId'];
-$img=$_POST['img'];
+$img_id=$_POST['img'];
 $endpoint = $_POST['endpoint'];
 
 
@@ -13,11 +13,11 @@ $endpoint = $_POST['endpoint'];
 require_once './mysql.php';
 
 // insert into database
-$q = sprintf(" INSERT INTO weather_task (worker_id, assignment_id, weather_data, img, endpoint) VALUES ('%s', '%s', '%s', '%s', '%s') ",
+$q = sprintf(" INSERT INTO app_db (worker_id, assignment_id, user_data, img_id, endpoint) VALUES ('%s', '%s', '%s', '%s', '%s') ",
     $workerID,
     $assignmentID,
-    $weatherData,
-	$img,
+    $user_data,
+	$img_id,
     $endpoint
     );
 mysql_query($q);
