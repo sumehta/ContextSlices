@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"> 
 <head> 
-<title>Weather task</title>
+<title>App task</title>
 </head> 
 <body>
 
