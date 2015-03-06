@@ -1,10 +1,10 @@
 <?php
 
 // get POST data from form
-$userData = $_POST['data'];
+$weatherData = $_POST['weather'];
 $assignmentID = $_POST['assignmentId'];
 $workerID = $_POST['workerId'];
-$img=$_POST['img'];
+$img_id=$_POST['img'];
 $endpoint = $_POST['endpoint'];
 
 
@@ -16,8 +16,8 @@ require_once './mysql.php';
 $q = sprintf(" INSERT INTO app_db (worker_id, assignment_id, user_data, img_id, endpoint) VALUES ('%s', '%s', '%s', '%s', '%s') ",
     $workerID,
     $assignmentID,
-    $userData,
-	$img,
+    $user_data,
+	$img_id,
     $endpoint
     );
 mysql_query($q);

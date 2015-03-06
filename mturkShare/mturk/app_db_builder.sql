@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `app_db`
+-- Table structure for table `weather_task`
 --
 
 CREATE TABLE IF NOT EXISTS `app_db` (
