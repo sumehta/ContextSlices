@@ -57,6 +57,7 @@ textarea {
 <?php
 
 $pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','images/DC.jpg','images/miami.jpg','images/uva.jpg','images/baltimore.jpg');
+#$pictures = scandir('images/');
 shuffle($pictures);
 $picture = $pictures[0];
 $disPlaypic = $picture
@@ -67,7 +68,7 @@ $disPlaypic = $picture
 
 	<img src="<?= $picture ?>" style="width: 600px;" />
     
-    <textarea name="weather"></textarea>
+    <textarea name="data"></textarea>
 
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />

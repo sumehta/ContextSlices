@@ -1,7 +1,7 @@
 <?php
 
 // get POST data from form
-$weatherData = $_POST['weather'];
+$user_data = $_POST['data'];
 $assignmentID = $_POST['assignmentId'];
 $workerID = $_POST['workerId'];
 $img_id=$_POST['img'];
