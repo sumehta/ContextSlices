@@ -23,12 +23,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `weather_task`
 --
 
-CREATE TABLE IF NOT EXISTS `where_img` (
+CREATE TABLE IF NOT EXISTS `app_db` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `worker_id` varchar(200) default NULL,
   `assignment_id` varchar(200) default NULL,
-  `weather_data` text,
-  `img` text,
+  `description` text,
+  `location` text,
+  `img_id` varchar(200) default NULL,
   `endpoint` varchar(50) NOT NULL,
   `when_completed` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)

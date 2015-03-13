@@ -50,48 +50,35 @@ textarea {
 
 <h3>Instructions</h3>
     
-<p>Look at the image presented and tell us where you think the image takes place (ie: MGM Grand, Las Vegas) be as specific as possible <p>
+<p>Look at the image presented and tell us where you think the image takes place (ie: MGM Grand, Las Vegas) be as specific as possible and do not guess!<p>
 
 
-<script>
-var arrayImg = new Array();
-arrayImg[0] = "nyc.jpg";
-arrayImg[1] = "PebbleBeach8.jpg";
-arrayImg[2] = "vt.jpg";
 
+<?php
 
-getRandomImage(arrayImg, "");
-
-function getRandomImage(imgAr, path) {
-    
-    var num = Math.floor( Math.random() * imgAr.length );
-    imgage = imgAr[ num ];
-    var imgStr = '<img HR WIDTH="60%" src="' + imgage + '" alt = "">';
-    document.write(imgStr); 
-    document.form.img.value = image;
-    document.close();
-}
-</script>
-
-<?php 
-	
-	$params = $_GET;
-	unset($params["img"]);
-	$params["img"] = "testvalue";
-	$new_query_string = http_build_query($params);
-	
+$pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','images/DC.jpg','images/miami.jpg','images/uva.jpg','images/baltimore.jpg');
+#$pictures = scandir('images/');
+shuffle($pictures);
+$picture = $pictures[0];
+$disPlaypic = $picture
 ?>
 
-   
-<form mame="form" method="POST" action="processWeather.php">
+	
+<form method="POST" action="processApp.php">
+
+	<img src="<?= $picture ?>" style="width: 600px;" />
     
-    <textarea name="weather"></textarea>
+    <p>Please describe what you see.</p>
+    <textarea name="description"></textarea>
+    
+    <p>Please name the location, name, area, etc. Be as specific as possible but please do not guess.</p>
+    <textarea name="location"></textarea>
 
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
-    <input type="hidden" name="img" value="<?= $_GET['img'] ?>" />
+	<input type="hidden" name="img" value="<?= $picture ?>" />
     <input type="hidden" name="endpoint" value="sandbox" />
-    <input type="submit" value="Submit HIT" />
+    <input type="submit" value="Submit Answers" />
 
 </form>
 

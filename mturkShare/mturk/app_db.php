@@ -68,6 +68,10 @@ $disPlaypic = $picture
 
 	<img src="<?= $picture ?>" style="width: 600px;" />
     
+    <p>Please describe what you see</p>
+    <textarea name="data"></textarea>
+    
+    <p>Please name the location, name, area, etc. Be as specific as possible but please do not guess.</p>
     <textarea name="data"></textarea>
 
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
