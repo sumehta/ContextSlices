@@ -24,6 +24,9 @@ $q = sprintf(" INSERT INTO app_db (worker_id, assignment_id, description, locati
     );
 mysql_query($q);
 
+// redirect us to second page for additional information
+header('Location: app_db_2.php?img_id='.$img_id);
+
 // redirect us to submit to MTurk
-header('Location: completed.php?assignmentId='.$assignmentID);
+// header('Location: completed.php?assignmentId='.$assignmentID);
 

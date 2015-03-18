@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"> 
 <head> 
-<title>Weather task</title>
+<title>Describe.</title>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
