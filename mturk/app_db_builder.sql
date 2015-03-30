@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS `app_db` (
   `assignment_id` varchar(200) default NULL,
   `description` text,
   `location` text,
+  `confidence` int(3),
+  `why` text,
   `img_id` varchar(200) default NULL,
   `endpoint` varchar(50) NOT NULL,
   `when_completed` timestamp NOT NULL default CURRENT_TIMESTAMP,

@@ -24,6 +24,28 @@ function getParameterByName(name) {
 }
     
 </script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#slider-range-max" ).slider({
+      range: "max",
+      min: 0,
+      max: 100,
+      value: 0,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value );
+        var element = document.getElementById("confidence");
+        element.value = ui.value;
+      }
+    });
+    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  });
+  </script>
+
+
 <style type="text/css">
 
 textarea {
@@ -61,24 +83,40 @@ $pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','im
 shuffle($pictures);
 $picture = $pictures[0];
 $disPlaypic = $picture
+
 ?>
 
 	
-<form method="POST" action="processApp.php">
+<form method="POST" id="form" action="processApp.php">
 
 	<img src="<?= $picture ?>" style="width: 600px;" />
     
-    <p>Please describe what you see.</p>
+    <p><b>Please describe what you see.</b></p>
     <textarea name="description"></textarea>
     
-    <p>Please name the location, name, area, etc. Be as specific as possible but please do not guess.</p>
+    <p><b>Please name the location, name, area, etc. Be as specific as possible and try not guess.</b></p>
     <textarea name="location"></textarea>
+    
+    <p><b>Please rate your confidence level in the following slider (0 = not confident at all, 100 = I am completely sure).</b></p>
+    
+	<p>
+  		<label for="amount">Confidence Percentage:</label>
+  		<input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%
+	</p>
+	<div id="slider-range-max"></div>
+	
+	<p><b>Why did you select the confidence percentage like you did above?</b></p>
+    <textarea name="why"></textarea>
 
+
+	<BR>
+	<BR>
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
+    <input type="hidden" name="confidence" id="confidence" value="" />
 	<input type="hidden" name="img" value="<?= $picture ?>" />
     <input type="hidden" name="endpoint" value="sandbox" />
-    <input type="submit" value="Submit Answers" />
+    <input type="submit" value="Submit Answers" style="font-size:25px;"/>
 
 </form>
 
