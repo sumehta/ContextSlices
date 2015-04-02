@@ -5,33 +5,64 @@ $img_id=$_GET['img_id'];
 <!doctype html>
 <html lang="en"> 
 <head> 
-<title>Evaluate Work</title>
 <meta charset="utf-8">
+<title>Evaluate Work</title>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#slider" ).slider();
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+#eq > span {
+  height:120px; float:left; margin:15px
+}
+</style>
+<script>
+$(function() {
+  // setup master volume
+  $( "#master" ).slider({
+    value: 60,
+    orientation: "horizontal",
+    range: "min",
+    animate: true
   });
-  </script>
+  // setup graphic EQ
+  $( "#eq > span" ).each(function() {
+    // read initial values from markup and remove that
+    var value = parseInt( $( this ).text(), 10 );
+    $( this ).empty().slider({
+      value: value,
+      range: "min",
+      animate: true,
+      orientation: "vertical"
+    });
+  });
+});
+</script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#radio" ).buttonset();
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+$(function() {
+  $( "#slider-range-max" ).slider({
+    range: "max",
+    min: 0,
+    max: 100,
+    value: 0,
+    slide: function( event, ui ) {
+      $( "#amount" ).val( ui.value );
+      var element = document.getElementById("confidence");
+      element.value = ui.value;
+    }
   });
-  </script>
+  $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+});
+</script>
+
 </head> 
 <body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
-</script>
 
 
 <?php //Created reviewDescribe[] and reviewLocation[] arrays
@@ -83,6 +114,8 @@ while($r = mysql_fetch_assoc($sth3)) {
 $reviewDescribe = array();
 $reviewLocation = array();
 
+//Store Id Array
+
 for($i=0;$i<$rowCounter;$i++)
 {
 	if($imgInfo[$i]["img_id"]==$img_id)
@@ -100,14 +133,18 @@ else {
 
 $table = '<table border="1" cellpadding="10">';
 $table .= '<tr><td><b>' . "Results for 'Description'" . '</b></td>';
-$table .= '<td><b>' . "Results for 'Location'" . '</b></td></tr>';
+$table .= '<td><b>' . "Results for 'Location'" . '</b></td>';
+$table .= '<td><b>' . "Rate it" . '</b></td></tr>';
 
 for($i=0;$i<count($reviewDescribe)-1;$i++) {
      
     $review = $reviewDescribe[$i];  
     $loc = $reviewLocation[$i];   
     $table .= '<tr><td>' . $review . '</td>';
-    $table .= '<td>' . $loc . '</td></tr>';
+    $table .= '<td>' . $loc . '</td>';
+    $table .= '<td><div id="eq"><span>88</span></div></td></tr>';
+    // $table .= '<td><p>
+//   	<label for="amount">Confidence Percentage:</label><input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%</p><div id="slider-range-max"></div></td></tr>';
     $i++;
 }
 
@@ -124,7 +161,27 @@ $table .= '</tr></table>';
 echo $table
 ?>
 
-<div id="slider"></div>
+<!-- <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
+  <span class="ui-icon ui-icon-volume-on" style="float:left; margin:-2px 5px 0 0;"></span>
+  Master volume
+</p> -->
+ 
+<!-- <div id="master" style="width:260px; margin:15px;"></div> -->
+ 
+<!-- <p class="ui-state-default ui-corner-all" style="padding:4px;margin-top:4em;">
+  <span class="ui-icon ui-icon-signal" style="float:left; margin:-2px 5px 0 0;"></span>
+  Graphic EQ
+</p>
+  -->
+<!-- <div id="eq"><span>88</span></div> -->
+
+
+
+<!-- <p>
+    <label for="amount">Confidence Percentage:</label>
+    <input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%
+</p>
+<div id="slider-range-max"></div> -->
 
 
 </body>

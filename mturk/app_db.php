@@ -108,7 +108,6 @@ $disPlaypic = $picture
 	<p><b>Why did you select the confidence percentage like you did above?</b></p>
     <textarea name="why"></textarea>
 
-
 	<BR>
 	<BR>
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
