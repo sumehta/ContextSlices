@@ -1,6 +1,6 @@
 <?php
 $img_id=$_GET['img_id'];
-
+$assignment_Id=$_GET['assignment_Id'];
 ?>
 <!doctype html>
 <html lang="en"> 
@@ -8,63 +8,12 @@ $img_id=$_GET['img_id'];
 <meta charset="utf-8">
 <title>Evaluate Work</title>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<style>
-#eq > span {
-  height:120px; float:left; margin:15px
-}
-</style>
-<script>
-$(function() {
-  // setup master volume
-  $( "#master" ).slider({
-    value: 60,
-    orientation: "horizontal",
-    range: "min",
-    animate: true
-  });
-  // setup graphic EQ
-  $( "#eq > span" ).each(function() {
-    // read initial values from markup and remove that
-    var value = parseInt( $( this ).text(), 10 );
-    $( this ).empty().slider({
-      value: value,
-      range: "min",
-      animate: true,
-      orientation: "vertical"
-    });
-  });
-});
-</script>
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script>
-$(function() {
-  $( "#slider-range-max" ).slider({
-    range: "max",
-    min: 0,
-    max: 100,
-    value: 0,
-    slide: function( event, ui ) {
-      $( "#amount" ).val( ui.value );
-      var element = document.getElementById("confidence");
-      element.value = ui.value;
-    }
-  });
-  $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
-});
-</script>
-
 </head> 
 <body>
 
 
+
+<form method="POST" id="form" action="processApp2.php">
 <?php //Created reviewDescribe[] and reviewLocation[] arrays
 
 //Connect to database
@@ -111,8 +60,16 @@ while($r = mysql_fetch_assoc($sth3)) {
    $locInfo[] = $r;
 }
 
+//Get an id array.
+$sth4 = mysql_query("SELECT assignment_id FROM app_db");
+$idInfo = array();
+while($r = mysql_fetch_assoc($sth4)) {
+   $idInfo[] = $r;
+}
+
 $reviewDescribe = array();
 $reviewLocation = array();
+$reviewID = array();
 
 //Store Id Array
 
@@ -120,8 +77,12 @@ for($i=0;$i<$rowCounter;$i++)
 {
 	if($imgInfo[$i]["img_id"]==$img_id)
 	{
+		if($idInfo[$i]["assignment_id"]!=$assignment_Id)
+		{
 		$reviewDescribe[]=$describeInfo[$i]["description"];
 		$reviewLocation[]=$locInfo[$i]["location"];
+		$reviewID[]=$idInfo[$i]["assignment_id"];
+		}
 	}
 	
 }
@@ -131,24 +92,37 @@ if(count($reviewDescribe) == 0) {
 }
 else {
 
-$table = '<table border="1" cellpadding="10">';
-$table .= '<tr><td><b>' . "Results for 'Description'" . '</b></td>';
-$table .= '<td><b>' . "Results for 'Location'" . '</b></td>';
-$table .= '<td><b>' . "Rate it" . '</b></td></tr>';
+  $table = '<table border="1" cellpadding="10">';
+  $table .= '<tr><td><b>' . "Results for 'Description'" . '</b></td>';
+  $table .= '<td><b>' . "Results for 'Location'" . '</b></td>';
+  $table .= '<td><b>' . "Review the Location" . '</b></td></tr>';
 
-for($i=0;$i<count($reviewDescribe)-1;$i++) {
-     
-    $review = $reviewDescribe[$i];  
-    $loc = $reviewLocation[$i];   
-    $table .= '<tr><td>' . $review . '</td>';
-    $table .= '<td>' . $loc . '</td>';
-    $table .= '<td><div id="eq"><span>88</span></div></td></tr>';
-    // $table .= '<td><p>
-//   	<label for="amount">Confidence Percentage:</label><input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%</p><div id="slider-range-max"></div></td></tr>';
-    $i++;
-}
+  //Let the row number of the table less than or equals to 5.
+  $rowNum=0;
+	if((count($reviewDescribe))<=5){
+	$rowNum=count($reviewDescribe);
+	}
+	else{
+	$rowNum=5;
+	}
+  
+  for($i=0;$i<$rowNum;$i++) {
+       
+      $review = $reviewDescribe[$i];  
+      $loc = $reviewLocation[$i];   
+      $table .= '<tr><td>' . $review . '</td>';
+      $table .= '<td>' . $loc . '</td>';
+      $table .= '<td><form action="" method="post">
+            <div><input type="radio" name="radio<?php echo $i ?>" value="1" checked>Definitely not right</div>
+            <div><input type="radio" name="radio<?php echo $i ?>" value="2">Proabbly not right, but not sure</div>
+            <div><input type="radio" name="radio<?php echo $i ?>" value="3">Proabbly right, but not sure</div>
+            <div><input type="radio" name="radio<?php echo $i ?>" value="4">Definitely right</div>
+            
+            
+          </form></td></tr>';
+  }
 
-$table .= '</tr></table>';
+  $table .= '</tr></table>';
 }
 ?>
 
@@ -157,32 +131,28 @@ $table .= '</tr></table>';
 
 <img src="<?= $img_id ?>" style="width: 600px;" />
 
-<?php
-echo $table
-?>
+<?php echo $table ?>
 
-<!-- <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
-  <span class="ui-icon ui-icon-volume-on" style="float:left; margin:-2px 5px 0 0;"></span>
-  Master volume
-</p> -->
- 
-<!-- <div id="master" style="width:260px; margin:15px;"></div> -->
- 
-<!-- <p class="ui-state-default ui-corner-all" style="padding:4px;margin-top:4em;">
-  <span class="ui-icon ui-icon-signal" style="float:left; margin:-2px 5px 0 0;"></span>
-  Graphic EQ
-</p>
-  -->
-<!-- <div id="eq"><span>88</span></div> -->
+<BR>
+<BR>
 
 
+	<input type="hidden" name="rowNumber" value="<?= $rowNum ?>" />
+	
+	<input type="hidden" name="reviewId1" value="<?= $reviewID[0] ?>" />
+	<input type="hidden" name="reviewId2" value="<?= $reviewID[1] ?>" />
+	<input type="hidden" name="reviewId3" value="<?= $reviewID[2] ?>" />
+	<input type="hidden" name="reviewId4" value="<?= $reviewID[3] ?>" />
+	<input type="hidden" name="reviewId5" value="<?= $reviewID[4] ?>" />
 
-<!-- <p>
-    <label for="amount">Confidence Percentage:</label>
-    <input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%
-</p>
-<div id="slider-range-max"></div> -->
+	
+    <input type="hidden" name="assignmentId" value="<?= $_GET['assignment_Id'] ?>" />
+    <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
+    <input type="hidden" name="img" value="<?= $img_id ?>" />
+    <input type="hidden" name="endpoint" value="sandbox" />
+    <input type="submit" value="Submit Answers" style="font-size:25px;"/>
 
+</form>
 
 </body>
 </html>
