@@ -112,14 +112,12 @@ else {
       $loc = $reviewLocation[$i];   
       $table .= '<tr><td>' . $review . '</td>';
       $table .= '<td>' . $loc . '</td>';
-      $table .= '<td><form action="" method="post">
-            <div><input type="radio" name="radio<?php echo $i ?>" value="1" checked>Definitely not right</div>
-            <div><input type="radio" name="radio<?php echo $i ?>" value="2">Proabbly not right, but not sure</div>
-            <div><input type="radio" name="radio<?php echo $i ?>" value="3">Proabbly right, but not sure</div>
-            <div><input type="radio" name="radio<?php echo $i ?>" value="4">Definitely right</div>
-            
-            
-          </form></td></tr>';
+      $table .= '<td>
+            <div><input type="radio" name="radio' . $i . '" value="1" checked>Definitely not right</div>
+            <div><input type="radio" name="radio' . $i . '" value="2">Proabbly not right, but not sure</div>
+            <div><input type="radio" name="radio' . $i . '" value="3">Proabbly right, but not sure</div>
+            <div><input type="radio" name="radio' . $i . '" value="4">Definitely right</div>
+            </td></tr>';
   }
 
   $table .= '</tr></table>';
