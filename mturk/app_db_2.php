@@ -113,10 +113,10 @@ else {
       $table .= '<tr><td>' . $review . '</td>';
       $table .= '<td>' . $loc . '</td>';
       $table .= '<td>
-            <div><input type="radio" name="radio' . $i . '" value="1" checked>Definitely not right</div>
-            <div><input type="radio" name="radio' . $i . '" value="2">Proabbly not right, but not sure</div>
-            <div><input type="radio" name="radio' . $i . '" value="3">Proabbly right, but not sure</div>
-            <div><input type="radio" name="radio' . $i . '" value="4">Definitely right</div>
+            <div><input type="radio" name="radio' . $i . '" value="1 ' . $reviewID[$i] . '" checked>Definitely not right</div>
+            <div><input type="radio" name="radio' . $i . '" value="2 ' . $reviewID[$i] . '">Proabbly not right, but not sure</div>
+            <div><input type="radio" name="radio' . $i . '" value="3 ' . $reviewID[$i] . '">Proabbly right, but not sure</div>
+            <div><input type="radio" name="radio' . $i . '" value="4 ' . $reviewID[$i] . '">Definitely right</div>
             </td></tr>';
   }
 
@@ -136,13 +136,13 @@ else {
 
 
 	<input type="hidden" name="rowNumber" value="<?= $rowNum ?>" />
-	
+	<!-- 
 	<input type="hidden" name="reviewId1" value="<?= $reviewID[0] ?>" />
 	<input type="hidden" name="reviewId2" value="<?= $reviewID[1] ?>" />
 	<input type="hidden" name="reviewId3" value="<?= $reviewID[2] ?>" />
 	<input type="hidden" name="reviewId4" value="<?= $reviewID[3] ?>" />
 	<input type="hidden" name="reviewId5" value="<?= $reviewID[4] ?>" />
-
+ -->
 	
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignment_Id'] ?>" />
     <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
