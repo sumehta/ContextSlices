@@ -1,9 +1,9 @@
 <?php
 
 //Connect to database
-$USERNAME = 'root';   //database username
-$PASSWORD = '';    //database password
-$DATABASE = 'turk';   //database name
+$USERNAME = 'contextslices';   //database username
+$PASSWORD = 'c0nt3xt';    //database password
+$DATABASE = 'contextslices';   //database name
 $URL = 'localhost';        //database location
 
 $link = mysql_connect($URL, $USERNAME, $PASSWORD);

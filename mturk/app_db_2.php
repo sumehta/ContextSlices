@@ -11,117 +11,44 @@ $assignment_Id=$_GET['assignment_Id'];
 </head> 
 <body>
 
-
-
 <form method="POST" id="form" action="processApp2.php">
 <?php //Created reviewDescribe[] and reviewLocation[] arrays
 
-//Connect to database
-$USERNAME = 'root';   //database username
-$PASSWORD = '';    //database password
-$DATABASE = 'turk';   //database name
-$URL = 'localhost';        //database location
-
-//Just check correctly connect
-$link = mysql_connect($URL, $USERNAME, $PASSWORD);
-if (!$link) 
-{
-	error_log('Could not connect: ' . mysql_error());
-	die('Could not connect: ' . mysql_error());
-}
-
-$db_selected = mysql_select_db($DATABASE, $link);
-if (!$db_selected) 
-{
-	error_log('Could not connect: ' . mysql_error());
-	die ('Could not connect: ' . mysql_error());
-}
+include 'mysql.php';
 
 //Get an description array. Get the number of rows in the table.
-$sth1 = mysql_query("SELECT description FROM app_db");
-$rowCounter = 0;
-$describeInfo = array();
-while($r = mysql_fetch_assoc($sth1)) {
-   $describeInfo[] = $r;
-   $rowCounter++;
-}
-
-//Get an image array.
-$sth2 = mysql_query("SELECT img_id FROM app_db");
-$imgInfo = array();
-while($r = mysql_fetch_assoc($sth2)) {
-   $imgInfo[] = $r;
-}
-
-//Get an location array.
-$sth3 = mysql_query("SELECT location FROM app_db");
-$locInfo = array();
-while($r = mysql_fetch_assoc($sth3)) {
-   $locInfo[] = $r;
-}
-
-//Get an id array.
-$sth4 = mysql_query("SELECT assignment_id FROM app_db");
-$idInfo = array();
-while($r = mysql_fetch_assoc($sth4)) {
-   $idInfo[] = $r;
-}
-
-$reviewDescribe = array();
-$reviewLocation = array();
-$reviewID = array();
-
-//Store Id Array
-
-for($i=0;$i<$rowCounter;$i++)
-{
-	if($imgInfo[$i]["img_id"]==$img_id)
-	{
-		if($idInfo[$i]["assignment_id"]!=$assignment_Id)
-		{
-		$reviewDescribe[]=$describeInfo[$i]["description"];
-		$reviewLocation[]=$locInfo[$i]["location"];
-		$reviewID[]=$idInfo[$i]["assignment_id"];
-		}
-	}
-	
-}
-
-if(count($reviewDescribe) == 0) {
-	echo "<h3>There are no previous submissions for this image.</h3>";
-}
-else {
+$sth1 = mysql_query("SELECT assignment_id, description, location, img_id FROM app_db ORDER BY RAND()");
+// $rowCounter = mysql_num_rows();
+$i = 0;
+//$describeInfo = array();
 
   $table = '<table border="1" cellpadding="10">';
   $table .= '<tr><td><b>' . "Results for 'Description'" . '</b></td>';
   $table .= '<td><b>' . "Results for 'Location'" . '</b></td>';
   $table .= '<td><b>' . "Review the Location" . '</b></td></tr>';
 
-  //Let the row number of the table less than or equals to 5.
-  $rowNum=0;
-	if((count($reviewDescribe))<=5){
-	$rowNum=count($reviewDescribe);
-	}
-	else{
-	$rowNum=5;
-	}
-  
-  for($i=0;$i<$rowNum;$i++) {
-       
-      $review = $reviewDescribe[$i];  
-      $loc = $reviewLocation[$i];   
-      $table .= '<tr><td>' . $review . '</td>';
-      $table .= '<td>' . $loc . '</td>';
+while($r = mysql_fetch_assoc($sth1)) {
+		
+	$assId = $r['assignment_id'];
+	$describeInfo = $r['description'];
+	$locInfo = $r['location'];
+	$imgInfo = $r['img_id'];
+	
+	if($imgInfo == $img_id && $assId!=$assignment_Id && $i < 5)
+	{       
+      $table .= '<tr><td>' . $describeInfo . '</td>';
+      $table .= '<td>' . $locInfo . '</td>';
       $table .= '<td>
-            <div><input type="radio" name="radio' . $i . '" value="1 ' . $reviewID[$i] . '" checked>Definitely not right</div>
-            <div><input type="radio" name="radio' . $i . '" value="2 ' . $reviewID[$i] . '">Proabbly not right, but not sure</div>
-            <div><input type="radio" name="radio' . $i . '" value="3 ' . $reviewID[$i] . '">Proabbly right, but not sure</div>
-            <div><input type="radio" name="radio' . $i . '" value="4 ' . $reviewID[$i] . '">Definitely right</div>
+            <div><input type="radio" name="radio' . $i . '" value="1 ' . $assId . '">Definitely wrong</div>
+            <div><input type="radio" name="radio' . $i . '" value="2 ' . $assId . '">Probably wrong</div>
+            <div><input type="radio" name="radio' . $i . '" value="3 ' . $assId . '">Probably right</div>
+            <div><input type="radio" name="radio' . $i . '" value="4 ' . $assId . '">Definitely right</div>
             </td></tr>';
-  }
-
-  $table .= '</tr></table>';
+      $i = $i + 1;      
+	}
 }
+  $table .= '</tr></table>';
+
 ?>
 
 <h2>Thank you! Your submission has been saved.</h2>
@@ -135,7 +62,7 @@ else {
 <BR>
 
 
-	<input type="hidden" name="rowNumber" value="<?= $rowNum ?>" />
+	<input type="hidden" name="rowNumber" value="<?= $i ?>" />
 	<!-- 
 	<input type="hidden" name="reviewId1" value="<?= $reviewID[0] ?>" />
 	<input type="hidden" name="reviewId2" value="<?= $reviewID[1] ?>" />
