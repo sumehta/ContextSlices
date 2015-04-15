@@ -77,8 +77,32 @@ textarea {
 
 
 <?php
-
-$pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','images/DC.jpg','images/miami.jpg','images/uva.jpg','images/baltimore.jpg');
+$pictures = Array(
+'images/alanturing.jpg',
+'images/alanturing2.jpg',
+'images/baltimore.jpg',
+'images/boston_marathon.jpg',
+'images/civil-war-004.jpg',
+'images/civilwar.jpg',
+'images/civilwar2.jpg',
+'images/DanceParade2013-PassionBolivia.jpg',
+'images/DC.jpg',
+'images/Ginger_Pride_in_rome.jpg',
+'images/miami.jpg',
+'images/nyc.jpg',
+'images/PebbleBeach8.jpg',
+'images/Turing-demonstration.jpg',
+'images/Turing-with-colleagues-Mark-1.jpg',
+'images/uva.jpg',
+'images/virginia_tech_football.jpg',
+'images/vt_football_old.jpg',
+'images/vt_vs_gt.jpg',
+'images/vt.jpg',
+'images/vtshooting1.jpg',
+'images/vtshooting2.jpg',
+'images/vtshooting3.jpg',
+'images/vtshooting4.jpg');
+// $pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','images/DC.jpg','images/miami.jpg','images/uva.jpg','images/baltimore.jpg');
 #$pictures = scandir('images/');
 shuffle($pictures);
 $picture = $pictures[0];
@@ -97,7 +121,7 @@ $disPlaypic = $picture
     <p><b>Please name the location, name, area, etc. Be as specific as possible and try not guess.</b></p>
     <textarea name="location"></textarea>
     
-    <p><b>Please rate your confidence level in the following slider (0 = not confident at all, 100 = I am completely sure).</b></p>
+    <p><b>Please rate your confidence level in the following slider<br />(0 = not confident at all, 100 = I am completely sure).</b></p>
     
 	<p>
   		<label for="amount">Confidence Percentage:</label>
@@ -105,7 +129,7 @@ $disPlaypic = $picture
 	</p>
 	<div id="slider-range-max"></div>
 	
-	<p><b>Why did you select the confidence percentage like you did above?</b></p>
+	<p><b>Please explain why you have that level of confidence about your answer.</b></p>
     <textarea name="why"></textarea>
 
 	<BR>
