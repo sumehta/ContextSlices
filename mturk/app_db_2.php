@@ -17,7 +17,10 @@ $assignment_Id=$_GET['assignment_Id'];
 include 'mysql.php';
 
 //Get an description array. Get the number of rows in the table.
-$sth1 = mysql_query("SELECT assignment_id, description, location, img_id FROM app_db ORDER BY RAND()");
+//ORDER by confidence
+$sth1 = mysql_query("SELECT assignment_id, description, location, img_id FROM app_db ORDER BY confidence DESC");
+//ORDER by RAND
+//$sth1 = mysql_query("SELECT assignment_id, description, location, img_id FROM app_db ORDER BY RAND()");
 // $rowCounter = mysql_num_rows();
 $i = 0;
 //$describeInfo = array();
