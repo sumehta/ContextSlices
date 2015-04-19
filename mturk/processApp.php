@@ -42,7 +42,7 @@ $result = mysql_query($q);
 if(mysql_num_rows($result) >= $minNumEntries) {
     // we have enough entries
     // redirect us to review page
-    header('Location: app_db_2.php?img_id='.$img_id.'&assignment_Id='.$assignmentId.'&workerId='.$workerId);
+    header('Location: app_db_2.php?img_id='.$img_id.'&assignmentId='.$assignmentId.'&workerId='.$workerId);
 } else {
     // redirect us to submit to MTurk
     header('Location: completed.php?assignmentId='.$assignmentId);  
