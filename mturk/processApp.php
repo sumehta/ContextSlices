@@ -5,8 +5,8 @@ $description = $_POST['description'];
 $location = $_POST['location'];
 $confidence = $_POST['confidence'];
 $why = $_POST['why'];
-$assignmentID = $_POST['assignmentId'];
-$workerID = $_POST['workerId'];
+$assignmentId = $_POST['assignmentId'];
+$workerId = $_POST['workerId'];
 $img_id=$_POST['img'];
 $endpoint = $_POST['endpoint'];
 
@@ -15,8 +15,8 @@ require_once './mysql.php';
 
 // insert into database
 $q = sprintf(" INSERT INTO app_db (worker_id, assignment_id, description, location, confidence, why, img_id, endpoint) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ",
-    $workerID,
-    $assignmentID,
+    $workerId,
+    $assignmentId,
     $description,
     $location,
     $confidence,
@@ -36,14 +36,14 @@ $q = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
     AND assignment_id != '%s' ",
     $img_id,
-    $assignmentID
+    $assignmentId
     );
 $result = mysql_query($q);
 if(mysql_num_rows($result) >= $minNumEntries) {
     // we have enough entries
     // redirect us to review page
-    header('Location: app_db_2.php?img_id='.$img_id.'&assignment_Id='.$assignmentID.'&workerId='.$workerID);
+    header('Location: app_db_2.php?img_id='.$img_id.'&assignment_Id='.$assignmentId.'&workerId='.$workerId);
 } else {
     // redirect us to submit to MTurk
-    header('Location: completed.php?assignmentId='.$assignmentID);  
+    header('Location: completed.php?assignmentId='.$assignmentId);  
 }
