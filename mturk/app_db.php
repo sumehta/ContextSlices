@@ -77,33 +77,36 @@ textarea {
 
 
 <?php
-$pictures = Array(
-'images/alanturing.jpg',
-'images/alanturing2.jpg',
-'images/baltimore.jpg',
-'images/boston_marathon.jpg',
-'images/civil-war-004.jpg',
-'images/civilwar.jpg',
-'images/civilwar2.jpg',
-'images/DanceParade2013-PassionBolivia.jpg',
-'images/DC.jpg',
-'images/Ginger_Pride_in_rome.jpg',
-'images/miami.jpg',
-'images/nyc.jpg',
-'images/PebbleBeach8.jpg',
-'images/Turing-demonstration.jpg',
-'images/Turing-with-colleagues-Mark-1.jpg',
-'images/uva.jpg',
-'images/virginia_tech_football.jpg',
-'images/vt_football_old.jpg',
-'images/vt_vs_gt.jpg',
-'images/vt.jpg',
-'images/vtshooting1.jpg',
-'images/vtshooting2.jpg',
-'images/vtshooting3.jpg',
-'images/vtshooting4.jpg');
-// $pictures = Array('images/nyc.jpg','images/PebbleBeach8.jpg','images/vt.jpg','images/DC.jpg','images/miami.jpg','images/uva.jpg','images/baltimore.jpg');
+// $pictures = Array(
+// 'images/alanturing.jpg',
+// 'images/alanturing2.jpg',
+// 'images/baltimore.jpg',
+// 'images/boston_marathon.jpg',
+// 'images/civil-war-004.jpg',
+// 'images/civilwar.jpg',
+// 'images/civilwar2.jpg',
+// 'images/DanceParade2013-PassionBolivia.jpg',
+// 'images/DC.jpg',
+// 'images/Ginger_Pride_in_rome.jpg',
+// 'images/miami.jpg',
+// 'images/nyc.jpg',
+// 'images/PebbleBeach8.jpg',
+// 'images/Turing-demonstration.jpg',
+// 'images/Turing-with-colleagues-Mark-1.jpg',
+// 'images/uva.jpg',
+// 'images/virginia_tech_football.jpg',
+// 'images/vt_football_old.jpg',
+// 'images/vt_vs_gt.jpg',
+// 'images/vt.jpg',
+// 'images/vtshooting1.jpg',
+// 'images/vtshooting2.jpg',
+// 'images/vtshooting3.jpg',
+// 'images/vtshooting4.jpg');
+
 #$pictures = scandir('images/');
+
+$pictures = Array('images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg');
+
 shuffle($pictures);
 $picture = $pictures[0];
 $disPlaypic = $picture
