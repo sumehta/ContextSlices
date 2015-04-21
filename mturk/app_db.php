@@ -1,19 +1,52 @@
 <!doctype html>
 <html lang="en"> 
 <head> 
-<title>Describe.</title>
+<title>Identify image</title>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
+    
+    // disable Submit button until HIT is accepted
    if(getParameterByName('assignmentId') == 'ASSIGNMENT_ID_NOT_AVAILABLE') {
-        $('#notAccepted').show();
-        $('#accepted').hide();
+        $('#submitButton').attr('disabled','disabled');
+        $('#submitButton').val("Please accept HIT");
    } else {
-        $('#accepted').show();
-        $('#notAccepted').hide();
+        $('#submitButton').removeAttr('disabled');
+        $('#submitButton').val("Submit");
    }
+    
+    $( "#slider-range-max" ).slider({
+      range: "max",
+      min: 0,
+      max: 100,
+      value: 50,
+      slide: function( event, ui ) {
+        $( "#confidence" ).val( ui.value );
+      }
+    });
+    
+    $( "#submitButton" ).click(function(){
+        // validate data was provided
+       if($("#description").val() == '') {
+           alert("You must provide a description (item #1).");
+           return false;
+       }
+        if($("#location").val() == '') {
+            alert("You must provide a name (item #2).");
+            return false;
+        }
+        if($("#confidence").val() == '') {
+            alert("You must rate your confidence by moving the slider (item #3)."); 
+            return false;
+        }
+        if($("#why").val() == '') {
+            alert("You must explain your confidence level (item #4).");
+            return false;
+        }
+        
+    });
 });
 
 function getParameterByName(name) {
@@ -25,128 +58,75 @@ function getParameterByName(name) {
     
 </script>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#slider-range-max" ).slider({
-      range: "max",
-      min: 0,
-      max: 100,
-      value: 0,
-      slide: function( event, ui ) {
-        $( "#amount" ).val( ui.value );
-        var element = document.getElementById("confidence");
-        element.value = ui.value;
-      }
-    });
-    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
-  });
-  </script>
-
-
-<style type="text/css">
-
-textarea {
-    width: 400px;
-    height: 80px;
-    display: block;
-}
-   
-#notAccepted {
-    color: red;
-    font-weight: bold;
-}
+<link rel="stylesheet" href="styles.css" type="text/css" />
     
-</style>
 </head> 
 <body>
+
+
+<h1>Instructions (part 1/2)</h1>
     
-<div id="notAccepted">
-
-<p>You must accept the HIT before you can see the details.</p>
+<p>Look at the image below and (1) describe what you see, (2) give the specific name of what you see, (3) rate your confidence in your answer, and (4) explain your confidence level.<p>
     
-</div>
-<div id="accepted">
-
-<h3>Instructions</h3>
+<p>Note: You are not required to get the correct answer to be paid, as long as you put in a serious effort.</p>
     
-<p>Look at the image presented and tell us where you think the image takes place (ie: MGM Grand, Las Vegas) be as specific as possible and do not guess!<p>
-
-
-
 <?php
-// $pictures = Array(
-// 'images/alanturing.jpg',
-// 'images/alanturing2.jpg',
-// 'images/baltimore.jpg',
-// 'images/boston_marathon.jpg',
-// 'images/civil-war-004.jpg',
-// 'images/civilwar.jpg',
-// 'images/civilwar2.jpg',
-// 'images/DanceParade2013-PassionBolivia.jpg',
-// 'images/DC.jpg',
-// 'images/Ginger_Pride_in_rome.jpg',
-// 'images/miami.jpg',
-// 'images/nyc.jpg',
-// 'images/PebbleBeach8.jpg',
-// 'images/Turing-demonstration.jpg',
-// 'images/Turing-with-colleagues-Mark-1.jpg',
-// 'images/uva.jpg',
-// 'images/virginia_tech_football.jpg',
-// 'images/vt_football_old.jpg',
-// 'images/vt_vs_gt.jpg',
-// 'images/vt.jpg',
-// 'images/vtshooting1.jpg',
-// 'images/vtshooting2.jpg',
-// 'images/vtshooting3.jpg',
-// 'images/vtshooting4.jpg');
-
-#$pictures = scandir('images/');
 
 $pictures = Array('images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg');
 
 shuffle($pictures);
 $picture = $pictures[0];
-$disPlaypic = $picture
 
 ?>
 
 	
 <form method="POST" id="form" action="processApp.php">
 
-	<img src="<?= $picture ?>" style="width: 600px;" />
+    <table id="layout">
+        <tr>
+            <td style="width: 60%; background: url(<?= $picture ?>) no-repeat; background-size: 100%;">
+            </td>
+            <td>
+    <p>1. Describe what you see, using as much detail as possible.</p>
+    <textarea id="description" name="description"></textarea>
     
-    <p><b>Please describe what you see.</b></p>
-    <textarea name="description"></textarea>
+    <p>2. Give the name(s) of what you see (name the person, town, object, etc.), being as specific as possible. If you don't know, use your best guess.</p>
+    <textarea id="location" name="location"></textarea>
     
-    <p><b>Please name the location, name, area, etc. Be as specific as possible and try not guess.</b></p>
-    <textarea name="location"></textarea>
+    <p>3. Rate your confidence in the above answer (#2) by moving the following slider left or right:</p>
     
-    <p><b>Please rate your confidence level in the following slider<br />(0 = not confident at all, 100 = I am completely sure).</b></p>
-    
-	<p>
-  		<label for="amount">Confidence Percentage:</label>
-  		<input type="text" id="amount" readonly style="border:0; font-size:14px; width: 25px;">%
-	</p>
-	<div id="slider-range-max"></div>
+    <table id="slider-table">
+        <tr>
+            <td colspan="3" style="text-align: center;">
+                <label>Your confidence: <input type="text" id="confidence" name="confidence" readonly="readonly" style="width: 2em; font-size: medium; " />%</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="slider-label" style="text-align: right;">Not at all confident</td>
+            <td><div id="slider-range-max"> </div></td>
+            <td class="slider-label" style="text-align: left;">Completely confident</td>
+        </tr>
+    </table>
 	
-	<p><b>Please explain why you have that level of confidence about your answer.</b></p>
-    <textarea name="why"></textarea>
+	
+	<p>4. Explain why you have that level of confidence about your answer. For example, if you knew a name, how did you know?</p>
+    <textarea id="why" name="why"></textarea>
 
-	<BR>
-	<BR>
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
-    <input type="hidden" name="confidence" id="confidence" value="" />
 	<input type="hidden" name="img" value="<?= $picture ?>" />
-    <input type="hidden" name="endpoint" value="sandbox" />
-    <input type="submit" value="Submit Answers" style="font-size:25px;"/>
+    <input type="hidden" name="endpoint" value="<?= $_GET['endpoint'] ?>" />
+    
+    <br />
+    <input id="submitButton" type="submit" value="Submit" />
+                
+                </td>
+        </tr>
+    </table>
 
 </form>
 
-</div>
 
 </body>
 </html>

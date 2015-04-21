@@ -12,7 +12,7 @@ $wrkrID = (string)$workers[0];
 // header('Location: http://localhost/mturk/app_db.php?assignment_Id='.$asgnID.'&workerId='.$wrkrID);
 
 //used for server side testing
-header('Location: http://crowd.cs.vt.edu/slices/mturk/app_db.php?assignmentId='.$asgnID.'&workerId='.$wrkrID);
+header('Location: http://crowd.cs.vt.edu/slices/mturk/app_db.php?assignmentId='.$asgnID.'&workerId='.$wrkrID.'&endpoint=sandbox');
 
 
 ?>

@@ -2,264 +2,43 @@
 
 // get POST data from form
 $assignmentID = $_POST['assignmentId'];
+$numRows = $_POST['numRows'];
 
-$workerID = $_POST['workerId'];
+// get other data for this task
+require_once 'mysql.php';
 
-$img_id=$_POST['img'];
-$endpoint = $_POST['endpoint'];
-
-
-if (!empty($_POST['radio0'])) 
-{
-    $data = $_POST['radio0'];
-    $radio0 = (int)$data[0];
-    $beReviewer_id1 = substr($data, 2);
-
-} 
-
-if (!empty($_POST['radio1'])) 
-{
-    $data = $_POST['radio1'];
-    $radio1 = (int)$data[0];
-    $beReviewer_id2 = substr($data, 2);
-} 
-
-if (!empty($_POST['radio2'])) 
-{
-    $data = $_POST['radio2'];
-    $radio2 = (int)$data[0];
-    $beReviewer_id3 = substr($data, 2);
-} 
-
-if (!empty($_POST['radio3'])) 
-{
-    $data = $_POST['radio3'];
-    $radio3 = (int)$data[0];
-    $beReviewer_id4 = substr($data, 2);
+$q = sprintf(" SELECT * FROM app_db WHERE assignment_id = '%s' ",
+    $assignmentID
+    );
+$results = mysql_query($q);
+while($row = mysql_fetch_assoc($results)) {
+    $workerID = $row['worker_id'];
+    $imgID = $row['img_id'];
+    $endpoint = $row['endpoint'];
 }
 
-if (!empty($_POST['radio4'])) 
-{
-    $data = $_POST['radio4'];
-    $radio4 = (int)$data[0];
-    $beReviewer_id5 = substr($data, 2);
-} 
-
-$rowNumber=$_POST['rowNumber'];
-
-switch($rowNumber){
-	case 1:
-	//$buttonValue=$radio1;
-
-	require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id1,
-    $assignmentID,
-    $radio0,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	break;
-	
-	
-	case 2:
-	
-	//$buttonValue=$radio1;
-	
-	require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id1,
-    $assignmentID,
-    $radio0,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-
-	//$buttonValue=$radio2;
-
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id2,
-    $assignmentID,
-    $radio1,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	break;
-	
-	
-	case 3:
-
-	require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id1,
-    $assignmentID,
-    $radio0,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	//$buttonValue=$radio2;
-
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id2,
-    $assignmentID,
-    $radio1,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	//$buttonValue=$radio3;
-
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id3,
-    $assignmentID,
-    $radio2,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	break;
-	
-	
-	case 4:
-		//$buttonValue=$radio1;
-
-	require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id1,
-    $assignmentID,
-    $radio0,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-
-	//$buttonValue=$radio2;
-	
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id2,
-    $assignmentID,
-    $radio1,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	//$buttonValue=$radio3;
-	
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id3,
-    $assignmentID,
-    $radio2,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	//$buttonValue=$radio4;
-	
-	//require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id4,
-    $assignmentID,
-    $radio3,
-	$img_id,
-    $endpoint
-    );
-	break;
-mysql_query($q);
-	
-	case 5:
-		//$buttonValue=$radio1;
-
-	require_once './mysql.php';
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id1,
-    $assignmentID,
-    $radio0,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-require_once './mysql.php';
-	//$buttonValue=$radio2;
-
-
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id2,
-    $assignmentID,
-    $radio1,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-require_once './mysql.php';
-	//$buttonValue=$radio3;
-
-	
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id3,
-    $assignmentID,
-    $radio2,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	//$buttonValue=$radio4;
-	
-	
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id4,
-    $assignmentID,
-    $radio3,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-
-	//$buttonValue=$radio5;
-	
-$q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint) VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-    $workerID,
-    $beReviewer_id5,
-    $assignmentID,
-    $radio4,
-	$img_id,
-    $endpoint
-    );
-mysql_query($q);
-	break;
-	
+// go through each row (review)
+for($i=0; $i<$numRows; $i++) {
+    
+    // get the raw review
+    $rawReview = $_POST['radio'.$i];
+    $reviewArr = explode(" ", $rawReview); // split by blank space
+    $reviewScore = $reviewArr[0]; // the worker's review
+    $reviewAssignmentID = $reviewArr[1]; // the assignmend ID being reviewed
+    
+    // insert review into database
+    $q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint)
+        VALUES ('%s', '%s', '%s', '%d','%s','%s')",
+        $workerID,
+        $reviewAssignmentID,
+        $assignmentID,
+        $reviewScore,
+        $imgID,
+        $endpoint // don't really need this
+        );
+    mysql_query($q);
+//    echo $q;
 }
 
-
-
-
-// redirect us to second page for additional information
-//header('Location: app_db_2.php?img_id='.$img_id);
-
-// redirect us to submit to MTurk
-
-
+// redirect to Completed page
 header('Location: completed.php?assignmentId='.$assignmentID);
-

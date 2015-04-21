@@ -30,7 +30,7 @@ mysql_query($q);
 // see if we have enough to push worker to review page
 // otherwise they're done
 
-$minNumEntries = 1; // should correspond to num shown on review page
+$minNumEntries = 5; // should correspond to num shown on review page
 
 $q = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
@@ -42,7 +42,7 @@ $result = mysql_query($q);
 if(mysql_num_rows($result) >= $minNumEntries) {
     // we have enough entries
     // redirect us to review page
-    header('Location: app_db_2.php?img_id='.$img_id.'&assignmentId='.$assignmentId.'&workerId='.$workerId);
+    header('Location: app_db_2.php?assignmentId='.$assignmentId);
 } else {
     // redirect us to submit to MTurk
     header('Location: completed.php?assignmentId='.$assignmentId);  

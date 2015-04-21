@@ -1,15 +1,43 @@
 <!doctype html>
 <html lang="en"> 
 <head> 
-<title>Weather task</title>
+<title>Completed</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
 </head> 
 <body>
 
-<h3>Submit your work</h3>
+<h1>Submit your work</h1>
     
-<p>Thanks for completing the task. Click the button below to submit your work.</p>
+<p>Almost done. Click the button below to submit your work.</p>
     
-<form method="POST" action="https://workersandbox.mturk.com/mturk/externalSubmit">
+<?php
+
+// connect to database
+require_once './mysql.php';
+
+// get endpoint for this assignmentID
+
+$assignmentID = $_GET['assignmentId'];
+
+$q = sprintf("SELECT endpoint FROM app_db WHERE assignment_id = '%s'",
+        $assignmentID
+        );
+$results = mysql_query($q);
+if(mysql_num_rows($results) == 0) {
+    die("Error: could not find this assignment.");   
+}
+while($row = mysql_fetch_assoc($results)) {
+    $endpoint = $row['endpoint'];
+}
+
+if($endpoint == "production")
+    $endpointURL = 'https://www.mturk.com/mturk/externalSubmit';
+else
+    $endpointURL = 'https://workersandbox.mturk.com/mturk/externalSubmit';
+
+?>
+    
+<form method="POST" action="<?= $endpointURL ?>">
     
     <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     
