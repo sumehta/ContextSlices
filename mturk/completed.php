@@ -41,7 +41,7 @@ else
     
     <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
     
-    <input type="submit" value="Submit HIT" />
+    <input type="submit" name="submit" value="Submit HIT" />
 
 </form>
     

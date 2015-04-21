@@ -39,5 +39,6 @@ table#reviews-table th {
 table#reviews-table td {
     vertical-align: top;
     border-top: 1px solid #ccc;
+    width: 25%;
     }
     
