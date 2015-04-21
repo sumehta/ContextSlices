@@ -99,10 +99,10 @@ while($r = mysql_fetch_assoc($sth1)) {
       echo '<td>' . $locInfo . '</td>';
       echo '<td>' . $confInfo .'</td>';
       echo '<td>
-            <div><input type="radio" name="radio' . $i . '" value="1 ' . $assId . '">Definitely wrong</div>
-            <div><input type="radio" name="radio' . $i . '" value="2 ' . $assId . '">Probably wrong</div>
-            <div><input type="radio" name="radio' . $i . '" value="3 ' . $assId . '">Probably right</div>
-            <div><input type="radio" name="radio' . $i . '" value="4 ' . $assId . '">Definitely right</div>
+            <label><input type="radio" name="radio' . $i . '" value="1 ' . $assId . '"> Definitely wrong</label>
+            <label><input type="radio" name="radio' . $i . '" value="2 ' . $assId . '"> Probably wrong</label>
+            <label><input type="radio" name="radio' . $i . '" value="3 ' . $assId . '"> Probably right</label>
+            <label><input type="radio" name="radio' . $i . '" value="4 ' . $assId . '"> Definitely right</label>
             </td>';
       echo '</tr>';
       $i++;      
