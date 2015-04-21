@@ -66,7 +66,7 @@ $scoresArr = array();
 while($row = mysql_fetch_assoc($results)) {
     $assignmentID = $row['assignment_id'];
     
-    $q2 = sprintf("SELECT * FROM appreview_db WHERE assignment_id = '%s'",
+    $q2 = sprintf("SELECT * FROM appreview_db WHERE beReviewer_id = '%s'",
         $assignmentID
         );
     $results2 = mysql_query($q2);
@@ -105,7 +105,7 @@ foreach($scoresArr as $s) {
         echo '<td class="centered">'.$row['confidence'].'</td>';
         echo '<td>'.truncateString($row['why']).'</td>';
         echo '<td class="centered">'.$s['num_reviews'].'</td>';
-        echo '<td class="centered">'.$s['avg_score'].'</td>';
+        echo '<td class="centered">'.number_format($s['avg_score'],1).'</td>';
         echo '<td> </td>';
         echo '</tr>';
     }
@@ -152,7 +152,7 @@ function convertReview($review) {
     return ($converted);
 }
 
-function truncateString($string, $maxChars=150) {
+function truncateString($string, $maxChars=300) {
     if(strlen($string) > $maxChars) {
         $truncated = substr($string, 0, $maxChars);
         $truncated .= " &hellip;";
