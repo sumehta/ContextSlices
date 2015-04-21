@@ -43,7 +43,9 @@ if(mysql_num_rows($result) >= $minNumEntries) {
     // we have enough entries
     // redirect us to review page
     header('Location: app_db_2.php?assignmentId='.$assignmentId);
+    exit();
 } else {
     // redirect us to submit to MTurk
     header('Location: completed.php?assignmentId='.$assignmentId);  
+    exit();
 }
