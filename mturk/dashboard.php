@@ -12,6 +12,13 @@
     
 <?php
 
+// make sure we've picked an endpoint to filter by
+if(!isset($_GET['endpoint'])) {
+    header('Location: dashboard.php?endpoint=production');
+    exit();
+}
+$endpoint = $_GET['endpoint'];
+
 // make sure an image is already selected
 if(isset($_GET['img']))
     $selectedImg = urldecode($_GET['img']);
@@ -28,12 +35,12 @@ while($row = mysql_fetch_assoc($results)) {
     $img = $row['img_id'];
     if(is_null($selectedImg)) {
         // no image is selected, so now that we know what images are available, let's select the first one
-        header('Location: dashboard.php?img='.urlencode($img));
+        header('Location: dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img));
         exit();
     } else {
         // if we've gotten this far, we've already selected an image
         $selected = ($img == $selectedImg) ? ' selected' : '';
-        echo '<a href="dashboard.php?img='.urlencode($img).'" class="nav-image'.$selected.'" title="'.$img.'" alt="'.$img.'"><img src="'.$img.'" /></a>';
+        echo '<a href="dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img).'" class="nav-image'.$selected.'" title="'.$img.'" alt="'.$img.'"><img src="'.$img.'" /></a>';
     }
 }
 
@@ -55,8 +62,9 @@ while($row = mysql_fetch_assoc($results)) {
 
 // show info for the selected image
 
-$q = sprintf("SELECT assignment_id FROM app_db WHERE img_id = '%s' ORDER BY id ASC",
-    $selectedImg
+$q = sprintf("SELECT assignment_id FROM app_db WHERE img_id = '%s' AND endpoint = '%s' ORDER BY id ASC",
+    $selectedImg,
+    $endpoint
             );
 $results = mysql_query($q);
 
