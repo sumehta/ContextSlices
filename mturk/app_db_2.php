@@ -1,6 +1,6 @@
 <?php
 $img_id=$_GET['img_id'];
-$assignment_Id=$_GET['assignment_Id'];
+$assignment_Id=$_GET['assignmentId'];
 ?>
 <!doctype html>
 <html lang="en"> 
