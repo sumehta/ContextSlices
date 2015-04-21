@@ -8,7 +8,7 @@
 
 <h1>Submit your work</h1>
     
-<p>Almost done. Click the button below to submit your work.</p>
+<p>Any feedback on this task? (optional)</p>
     
 <?php
 
@@ -39,8 +39,10 @@ else
     
 <form method="POST" action="<?= $endpointURL ?>">
     
-    <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
+    <textarea name="feedback"></textarea>
     
+    <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
+    <br />
     <input type="submit" name="submit" value="Submit HIT" />
 
 </form>
