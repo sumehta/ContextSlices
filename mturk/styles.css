@@ -27,6 +27,16 @@ table#layout td {
     padding: 10px;
     }
 
+table#layout td#image-cell {
+    vertical-align: middle;
+    text-align: center;
+    font-size: x-large;
+    background-color: #ccc;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 60%;
+    }
+
 table#reviews-table {
     width: 100%;
     border-collapse: collapse;
@@ -46,4 +56,3 @@ table#reviews-table td {
 table#reviews-table label {
     display: block;
     }
-    

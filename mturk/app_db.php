@@ -11,10 +11,9 @@ $(document).ready(function(){
     // disable Submit button until HIT is accepted
    if(getParameterByName('assignmentId') == 'ASSIGNMENT_ID_NOT_AVAILABLE') {
         $('#submitButton').attr('disabled','disabled');
-        $('#submitButton').val("Please accept HIT");
-   } else {
-        $('#submitButton').removeAttr('disabled');
-        $('#submitButton').val("Submit");
+        $('#submitButton').val("Please accept HIT to submit");
+        $('#image-cell').text("Please accept HIT to view image");
+        $('#image-cell').css('background-size','0 0');
    }
     
     $( "#slider-range-max" ).slider({
@@ -92,7 +91,7 @@ $picture = $pictures[0];
 
     <table id="layout">
         <tr>
-            <td style="width: 60%; background: url(<?= $picture ?>) no-repeat; background-size: 100%;">
+            <td id="image-cell" style="background-image: url(<?= $picture ?>);">
             </td>
             <td>
     <p>1. Describe what you see, using as much detail as possible.</p>
