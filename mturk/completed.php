@@ -23,9 +23,9 @@ $q = sprintf("SELECT endpoint FROM app_db WHERE assignment_id = '%s'",
         $assignmentID
         );
 $results = mysql_query($q);
-if(mysql_num_rows($results) == 0) {
-    die("Error: could not find this assignment.");   
-}
+//if(mysql_num_rows($results) == 0) {
+//    die("Error: could not find this assignment.");   
+//}
 while($row = mysql_fetch_assoc($results)) {
     $endpoint = $row['endpoint'];
 }
@@ -41,7 +41,7 @@ else
     
     <textarea name="feedback"></textarea>
     
-    <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
+    <input type="hidden" id="assignmentId" name="assignmentId" value="<?= $assignmentID ?>" />
     <br />
     <input type="submit" name="submit" value="Submit HIT" />
 
