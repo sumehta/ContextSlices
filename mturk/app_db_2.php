@@ -72,11 +72,13 @@ $(document).ready(function(){
 //ORDER by confidence
 $q = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
-    AND assignment_id != '%s' 
+    AND assignment_id != '%s'
+    AND endpoint = '%s'
     ORDER BY confidence DESC
     LIMIT 5 ",
     $img_id,
-    $assignment_Id
+    $assignment_Id,
+    $endpoint
     );
 
 $sth1 = mysql_query($q);
