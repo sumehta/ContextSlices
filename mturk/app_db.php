@@ -73,6 +73,13 @@ function getParameterByName(name) {
     
 <?php
 
+// worker ID may not be available yet
+if(isset($_GET['workerId']))
+    $workerID = $_GET['workerId'];
+else
+    $workerID = '';
+
+// choose picture for this task
 $pictures = Array('images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg');
 
 shuffle($pictures);
@@ -114,7 +121,7 @@ $picture = $pictures[0];
     <textarea id="why" name="why"></textarea>
 
     <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
-    <input type="hidden" name="workerId" value="<?= $_GET['workerId'] ?>" />
+    <input type="hidden" name="workerId" value="<?= $workerID ?>" />
 	<input type="hidden" name="img" value="<?= $picture ?>" />
     <input type="hidden" name="endpoint" value="<?= $_GET['endpoint'] ?>" />
     
