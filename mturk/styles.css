@@ -37,6 +37,8 @@ table#layout td#image-cell {
     width: 60%;
     }
 
+/* Review page styles */
+
 table#reviews-table {
     width: 100%;
     border-collapse: collapse;
@@ -55,4 +57,43 @@ table#reviews-table td {
 
 table#reviews-table label {
     display: block;
+    }
+
+/* Dashboard styles */
+
+a.nav-image {
+    float: left;
+    margin: 0 1em 1em 0; padding: 0;
+    width: 100px;
+    }
+
+a.nav-image.selected {
+    border: 5px solid lightblue;
+    width: 300px;
+    margin-bottom: 2em;
+    }
+
+a.nav-image img {
+    width: 100%;
+    margin: 0; padding: 0;
+    }
+
+div.line {
+    clear: both;
+    border-bottom: 1px solid #ccc;
+    margin: 1em 0;
+    }
+
+table#agg-reviews {
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+table#agg-reviews td, table#agg-reviews th {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    }
+
+.centered {
+    text-align: center;
     }
