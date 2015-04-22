@@ -15,14 +15,14 @@ require_once './mysql.php';
 
 // insert into database
 $q = sprintf(" INSERT INTO app_db (worker_id, assignment_id, description, location, confidence, why, img_id, endpoint) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ",
-    $workerId,
-    $assignmentId,
-    $description,
-    $location,
-    $confidence,
-    $why,
-	$img_id,
-    $endpoint
+    mysql_real_escape_string($workerId),
+    mysql_real_escape_string($assignmentId),
+    mysql_real_escape_string($description),
+    mysql_real_escape_string($location),
+    mysql_real_escape_string($confidence),
+    mysql_real_escape_string($why),
+    mysql_real_escape_string($img_id),
+    mysql_real_escape_string($endpoint)
     );
 mysql_query($q);
 

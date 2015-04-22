@@ -29,12 +29,12 @@ for($i=0; $i<$numRows; $i++) {
     // insert review into database
     $q = sprintf(" INSERT INTO appreview_db (worker_id, beReviewer_id, assignment_id, buttonValue, img_id, endpoint)
         VALUES ('%s', '%s', '%s', '%d','%s','%s')",
-        $workerID,
-        $reviewAssignmentID,
-        $assignmentID,
-        $reviewScore,
-        $imgID,
-        $endpoint // don't really need this
+        mysql_real_escape_string($workerID),
+        mysql_real_escape_string($reviewAssignmentID),
+        mysql_real_escape_string($assignmentID),
+        mysql_real_escape_string($reviewScore),
+        mysql_real_escape_string($imgID),
+        mysql_real_escape_string($endpoint)
         );
     mysql_query($q);
 //    echo $q;
