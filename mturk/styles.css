@@ -84,7 +84,7 @@ div.line {
     margin: 1em 0;
     }
 
-table#agg-reviews {
+/*table#agg-reviews {
     border-collapse: collapse;
     width: 100%;
     }
@@ -92,8 +92,46 @@ table#agg-reviews {
 table#agg-reviews td, table#agg-reviews th {
     padding: 0.5em;
     border: 1px solid #ccc;
-    }
+    }*/
 
 .centered {
     text-align: center;
     }
+
+
+
+/************* for dashboard *****************/
+#dashboard_body {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.navbar>.container .navbar-brand,
+.navbar>.container-fluid .navbar-brand {
+  margin-left: -85px !important;
+}
+
+.navbar-brand {
+    font-size: 27px !important;
+}
+
+#dashboard_container {
+    margin-top: 80px;
+}
+
+.dash_table_width_22 {
+    width: 22%;
+}
+.dash_table_width_13 {
+    width: 13%;
+}
+.dash_table_width_7 {
+    width: 7%;
+}
+
+.dash_table_text_horizontal_center {
+    text-align: center;
+}
+
+.dash_table_text_vertical_middle {
+    vertical-align: middle !important;
+}
