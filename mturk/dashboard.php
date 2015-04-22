@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en"> 
 <head> 
-<meta charset="utf-8">
-<title>Dashboard</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
-<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
 
-<script src="js/lib/jquery-2.1.3.min.js"></script>
-<script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/jquery-2.1.3.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
 </head>
 <body id="dashboard_body">
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -20,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand" href="#">ConctextSlice Dashboard</a>
         </div>
     </div>
 </nav>
@@ -67,8 +67,8 @@
             ?>
         </div>
 
-        <div class="row" id="dashboard_content_table">
-            <table id="agg-reviews" class="table table-hover table-condensed table-bordered">
+        <div class="row" id="dashboard_content_table" class="shade-container">
+            <table id="agg-reviews" class="table table-hover">
                 <tr>
                     <th class="dash_table_width_22 dash_table_text_horizontal_center">Description</th>
                     <th class="dash_table_width_22 dash_table_text_horizontal_center">Name(s)</th>
@@ -193,13 +193,38 @@
             </table>
         </div>
 
+
+        <div id="vislayer-container" class="shade-container-light">
+            <span class="glyphicon glyphicon-new-window btn" id="vislayer_icon"></span>
+            <div id="vislayer">
+                <div class="col-md-5" id="biset_doc_relevent_info">
+                    <div class="panel panel-default vislayer_panel" id="biset_doc_from_bic">
+                        <div class="panel-heading vislayer_panelTitle" id="biset_checked_bicID">
+                            <h3 class="panel-title">Histogram</h3>
+                        </div>
+                        <div class="panel-body vislayer_panel_body">
+                        </div>
+                    </div>                      
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-info vislayer_panel">
+                        <div class="panel-heading vislayer_panelTitle">
+                            <h3 class="panel-title">Timeline</h3>
+                        </div>
+                        <div class="panel-body vislayer_panel_body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
   
 </div>
     
-
-    
+    <script src="js/dtable.js"></script>
+    <script src="js/vislayer.js"></script>
 </body>
 </html>
