@@ -79,7 +79,13 @@ else
     $workerID = '';
 
 // choose picture for this task
-$pictures = Array('images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg');
+$pictures = Array(
+    'images/1.jpg',
+    'images/2.jpg',
+    'images/3.jpg',
+    'images/4.jpg',
+    'images/5.jpg'
+);
 
 shuffle($pictures);
 $picture = $pictures[0];

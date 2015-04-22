@@ -74,7 +74,7 @@ $q = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
     AND assignment_id != '%s'
     AND endpoint = '%s'
-    ORDER BY confidence DESC
+    ORDER BY RAND()
     LIMIT 5 ",
     $img_id,
     $assignment_Id,
