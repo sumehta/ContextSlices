@@ -73,7 +73,6 @@ $(document).ready(function(){
 $q = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
     AND assignment_id != '%s'
-    AND endpoint = '%s'
     ORDER BY RAND()
     LIMIT 5 ",
     $img_id,
