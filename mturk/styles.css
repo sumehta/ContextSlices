@@ -187,3 +187,24 @@ div.shade-container-light {
     height: 310px;
     overflow-y: auto;
 }
+
+/* for histogram */
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+#dash_left {
+    width: 25%;
+}
+
+#dashboard_content_table {
+    margin-left: 40px;
+    margin-right: 50px;
+}

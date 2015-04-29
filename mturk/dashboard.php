@@ -8,6 +8,7 @@
 
     <script src="js/lib/jquery-2.1.3.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/d3.min.js"></script>
 </head>
 <body id="dashboard_body">
 
@@ -29,44 +30,55 @@
 <!-- <h1>Dashboard</h1> -->
 <div class="container-fluid" id="dashboard_container">
 
-    <div class="col-md-9 col-md-offset-1">
-        <div class="row" id="dashboard_img_list">
-            <?php
-                // make sure we've picked an endpoint to filter by
-                if(!isset($_GET['endpoint'])) {
-                    header('Location: dashboard.php?endpoint=production');
-                    exit();
-                }
-                $endpoint = $_GET['endpoint'];
-                
-                // make sure an image is already selected
-                if(isset($_GET['img']))
-                    $selectedImg = urldecode($_GET['img']);
-                else
-                    $selectedImg = null;
-                
-                require_once 'mysql.php';
-                
-                // show navigation menu
-                
-                $q = sprintf("SELECT DISTINCT img_id FROM app_db ORDER BY img_id ASC");
-                $results = mysql_query($q);
-                while($row = mysql_fetch_assoc($results)) {
-                    $img = $row['img_id'];
-                    if(is_null($selectedImg)) {
-                        // no image is selected, so now that we know what images are available, let's select the first one
-                        header('Location: dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img));
-                        exit();
-                    } else {
-                        // if we've gotten this far, we've already selected an image
-                        $selected = ($img == $selectedImg) ? ' selected' : '';
-                        echo '<a href="dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img).'" class="nav-image'.$selected.'" title="'.$img.'" alt="'.$img.'"><img src="'.$img.'" /></a>';
-                    }
-                }
-                
-            ?>
-        </div>
+    <div class="col-md-3 col-md-offset-1">
+        <div class="sidebar-nav-fixed affix" id="dash_left">
 
+            <div class="row" id="dashboard_img_list">
+                <div class="col-md-9">
+                    <?php
+                        // make sure we've picked an endpoint to filter by
+                        if(!isset($_GET['endpoint'])) {
+                            header('Location: dashboard.php?endpoint=production');
+                            exit();
+                        }
+                        $endpoint = $_GET['endpoint'];
+                        
+                        // make sure an image is already selected
+                        if(isset($_GET['img']))
+                            $selectedImg = urldecode($_GET['img']);
+                        else
+                            $selectedImg = null;
+                        
+                        require_once 'mysql.php';
+                        
+                        // show navigation menu
+                        
+                        $q = sprintf("SELECT DISTINCT img_id FROM app_db ORDER BY img_id ASC");
+                        $results = mysql_query($q);
+                        while($row = mysql_fetch_assoc($results)) {
+                            $img = $row['img_id'];
+                            if(is_null($selectedImg)) {
+                                // no image is selected, so now that we know what images are available, let's select the first one
+                                header('Location: dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img));
+                                exit();
+                            } else {
+                                // if we've gotten this far, we've already selected an image
+                                $selected = ($img == $selectedImg) ? ' selected' : '';
+                                echo '<a href="dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img).'" class="nav-image'.$selected.'" title="'.$img.'" alt="'.$img.'"><img src="'.$img.'" /></a>';
+                            }
+                        }
+                    ?>              
+                </div>
+            </div>
+            <div class="row">
+                <div id="hist">
+                </div>            
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-md-8">
         <div class="row" id="dashboard_content_table" class="shade-container">
             <table id="agg-reviews" class="table table-hover">
                 <tr>
@@ -192,6 +204,50 @@
                     ?>
             </table>
         </div>
+    </div>
+
+    <!-- <div class="col-md-9 col-md-offset-1">
+        <div class="row" id="dashboard_img_list">
+            <div class="col-md-9">
+                <?php
+                    // make sure we've picked an endpoint to filter by
+                    if(!isset($_GET['endpoint'])) {
+                        header('Location: dashboard.php?endpoint=production');
+                        exit();
+                    }
+                    $endpoint = $_GET['endpoint'];
+                    
+                    // make sure an image is already selected
+                    if(isset($_GET['img']))
+                        $selectedImg = urldecode($_GET['img']);
+                    else
+                        $selectedImg = null;
+                    
+                    require_once 'mysql.php';
+                    
+                    // show navigation menu
+                    
+                    $q = sprintf("SELECT DISTINCT img_id FROM app_db ORDER BY img_id ASC");
+                    $results = mysql_query($q);
+                    while($row = mysql_fetch_assoc($results)) {
+                        $img = $row['img_id'];
+                        if(is_null($selectedImg)) {
+                            // no image is selected, so now that we know what images are available, let's select the first one
+                            header('Location: dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img));
+                            exit();
+                        } else {
+                            // if we've gotten this far, we've already selected an image
+                            $selected = ($img == $selectedImg) ? ' selected' : '';
+                            echo '<a href="dashboard.php?endpoint='.urlencode($endpoint).'&img='.urlencode($img).'" class="nav-image'.$selected.'" title="'.$img.'" alt="'.$img.'"><img src="'.$img.'" /></a>';
+                        }
+                    }
+                ?>              
+            </div>
+            <div class="col-md-3" id="hist">
+            </div>
+        </div>
+
+ -->
 
 
         <div id="vislayer-container" class="shade-container-light">
@@ -223,7 +279,7 @@
 
   
 </div>
-    
+    <script src="js/histogram.js"></script>
     <script src="js/dtable.js"></script>
     <script src="js/vislayer.js"></script>
 </body>
