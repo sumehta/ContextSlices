@@ -68,10 +68,11 @@ $(document).ready(function(){
 //Select all assigmentIds in the app_db and count how many times they have been reviewed in the appreview_db.
 $q2 = sprintf(" SELECT * FROM app_db
     WHERE img_id = '%s'
-    AND assignment_id != '%s' ",
+    AND assignment_id != '%s'
+	AND endpoint = '%s'	",
     $img_id,
     $assignment_Id,
-    $endpoint
+    $endpoint'
     );
 	$sth2 = mysql_query($q2);
 	
