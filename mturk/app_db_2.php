@@ -72,7 +72,7 @@ $q2 = sprintf(" SELECT * FROM app_db
 	AND endpoint = '%s'	",
     $img_id,
     $assignment_Id,
-    $endpoint'
+    $endpoint
     );
 	$sth2 = mysql_query($q2);
 	
