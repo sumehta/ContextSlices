@@ -70,6 +70,7 @@
                     ?>              
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div id="hist">
                 </div>            

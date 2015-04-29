@@ -115,7 +115,7 @@ table#agg-reviews td, table#agg-reviews th {
 }
 
 #dashboard_container {
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 .dash_table_width_22 {
@@ -201,7 +201,8 @@ div.shade-container-light {
 }
 
 #dash_left {
-    width: 25%;
+    width: 26%;
+    margin-bottom: 20px;
 }
 
 #dashboard_content_table {
