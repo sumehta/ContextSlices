@@ -1,5 +1,7 @@
-<?php
+<!-- This file is in charge of the second page of the web application. This page is in charge of getting the worker to review other workers
+work for the same image -->
 
+<?php
 $assignment_Id=$_GET['assignmentId'];
 
 // get info for this assignment
@@ -14,7 +16,6 @@ while($row = mysql_fetch_assoc($results)) {
     $workerId = $row['worker_id'];
     $endpoint = $row['endpoint'];
 }
-
 ?>
 <!doctype html>
 <html lang="en"> 
@@ -141,7 +142,5 @@ $q2 = sprintf(" SELECT * FROM app_db
 <input id="submitButton" type="submit" value="Submit" />
 
 </form>
-
-
 </body>
 </html>

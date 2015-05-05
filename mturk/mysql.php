@@ -1,3 +1,6 @@
+<!-- Connects to our database. (LIVE ; server side) -->
+
+
 <?php
 
 //Connect to database

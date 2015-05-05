@@ -1,3 +1,6 @@
+<!-- Final page of the web application. Redirects them back to Mturk and submits the appropaite information -->
+
+
 <!doctype html>
 <html lang="en"> 
 <head> 

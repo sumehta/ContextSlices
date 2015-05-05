@@ -1,3 +1,6 @@
+<!-- This file takes the submissions from the second page and stores it in the MySQL database appropritely -->
+
+
 <?php
 
 // get POST data from form

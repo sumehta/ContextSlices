@@ -1,3 +1,11 @@
+-- This file is used to create the 2 tables in the MySQL database. 
+-- Table 1 is the first page's submissions
+-- Table 2 is the second page's submissions
+
+
+
+
+
 -- phpMyAdmin SQL Dump
 -- version 4.2.11
 -- http://www.phpmyadmin.net

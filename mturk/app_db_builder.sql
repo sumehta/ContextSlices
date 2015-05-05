@@ -1,3 +1,6 @@
+-- No longer used. Use 2Tables.sql to pupulate local host database. This file will only create one table (to store first page's results)
+
+
 -- phpMyAdmin SQL Dump
 -- version 3.4.9
 -- http://www.phpmyadmin.net

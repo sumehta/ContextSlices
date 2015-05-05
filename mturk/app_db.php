@@ -1,3 +1,6 @@
+<!-- This file is the first page of the application. It is in charge of populating a random image of our collection and retrieve the relevant
+information (submissions) from the workers. -->
+
 <!doctype html>
 <html lang="en"> 
 <head> 
@@ -70,8 +73,8 @@ function getParameterByName(name) {
     
 <p>Note: You are not required to get the correct answer to be paid, as long as you put in a serious effort.</p>
     
+<!-- PHP script to randomly choose the image to populate -->
 <?php
-
 // worker ID may not be available yet
 if(isset($_GET['workerId']))
     $workerID = $_GET['workerId'];
@@ -89,9 +92,7 @@ $pictures = Array(
 
 shuffle($pictures);
 $picture = $pictures[0];
-
 ?>
-
 	
 <form method="POST" id="form" action="processApp.php">
 
@@ -100,45 +101,40 @@ $picture = $pictures[0];
             <td id="image-cell" style="background-image: url(<?= $picture ?>);">
             </td>
             <td>
-    <p>1. Describe what you see, using as much detail as possible.</p>
-    <textarea id="description" name="description"></textarea>
-    
-    <p>2. Give the name(s) of what you see (name the person, town, object, etc.), being as specific as possible. If you don't know, use your best guess.</p>
-    <textarea id="location" name="location"></textarea>
-    
-    <p>3. Rate your confidence in the above answer (#2) by moving the following slider left or right:</p>
-    
-    <table id="slider-table">
-        <tr>
-            <td colspan="3" style="text-align: center;">
-                <label>Your confidence: <input type="text" id="confidence" name="confidence" readonly="readonly" style="width: 2em; font-size: medium; " />%</label>
+            <p>1. Describe what you see, using as much detail as possible.</p>
+            <textarea id="description" name="description"></textarea>
+            
+            <p>2. Give the name(s) of what you see (name the person, town, object, etc.), being as specific as possible. If you don't know, use your best guess.</p>
+            <textarea id="location" name="location"></textarea>
+            
+            <p>3. Rate your confidence in the above answer (#2) by moving the following slider left or right:</p>
+            
+            <table id="slider-table">
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <label>Your confidence: <input type="text" id="confidence" name="confidence" readonly="readonly" style="width: 2em; font-size: medium; " />%</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="slider-label" style="text-align: right;">Not at all confident</td>
+                    <td><div id="slider-range-max"> </div></td>
+                    <td class="slider-label" style="text-align: left;">Completely confident</td>
+                </tr>
+            </table>
+        	
+        	<p>4. Explain why you have that level of confidence about your answer. For example, if you knew a name, how did you know?</p>
+            <textarea id="why" name="why"></textarea>
+
+            <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
+            <input type="hidden" name="workerId" value="<?= $workerID ?>" />
+        	<input type="hidden" name="img" value="<?= $picture ?>" />
+            <input type="hidden" name="endpoint" value="<?= $_GET['endpoint'] ?>" />
+            
+            <br />
+            <input id="submitButton" type="submit" value="Submit" /> 
             </td>
         </tr>
-        <tr>
-            <td class="slider-label" style="text-align: right;">Not at all confident</td>
-            <td><div id="slider-range-max"> </div></td>
-            <td class="slider-label" style="text-align: left;">Completely confident</td>
-        </tr>
     </table>
-	
-	
-	<p>4. Explain why you have that level of confidence about your answer. For example, if you knew a name, how did you know?</p>
-    <textarea id="why" name="why"></textarea>
-
-    <input type="hidden" name="assignmentId" value="<?= $_GET['assignmentId'] ?>" />
-    <input type="hidden" name="workerId" value="<?= $workerID ?>" />
-	<input type="hidden" name="img" value="<?= $picture ?>" />
-    <input type="hidden" name="endpoint" value="<?= $_GET['endpoint'] ?>" />
-    
-    <br />
-    <input id="submitButton" type="submit" value="Submit" />
-                
-                </td>
-        </tr>
-    </table>
-
 </form>
-
-
 </body>
 </html>

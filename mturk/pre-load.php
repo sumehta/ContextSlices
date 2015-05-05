@@ -1,3 +1,6 @@
+<!-- Script to be ran when trying to test locally. Pre-populates the headers (assignment id and worker id) rather than having to physically hard code
+the parameters in the link. -->
+
 <?php
 // Randomly genrate and worker id as well as assignment id
 
