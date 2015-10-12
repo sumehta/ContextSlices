@@ -7,6 +7,6 @@ def convert_to_cartesian(lat=0, long=0, R=0):
     y = R*cos(radians(lat))*sin(radians(long))
     z = R*sin(radians(lat))
 
-    return [x,y,z]
+    return x,y,z
 
 
